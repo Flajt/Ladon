@@ -1,0 +1,42 @@
+import 'dart:io';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_autofill_service/flutter_autofill_service.dart';
+import 'package:hive/hive.dart';
+import 'package:ladon/features/passwordManager/logic/passwordManager.dart';
+import 'package:ladon/features/passwordManager/uiblocks/PasswordEditingPage.dart';
+import 'package:ladon/pages/HomePage.dart';
+import 'package:ladon/pages/OtpPage.dart';
+import 'package:ladon/pages/PasswordPage.dart';
+import 'package:path_provider/path_provider.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  Directory? path = await getExternalStorageDirectory();
+  Hive.init(path!.path);
+  await PasswordManager().setup(Hive.generateSecureKey());
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      routes: {
+        "/addPasswordPage": (context) => const PasswordPage(),
+        "/addOtpPage": (context) => OtpPage(),
+        "/editPasswordPage": (context) => const PasswordEditingPage()
+      },
+      title: 'Ladon',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(
+            seedColor: const Color.fromARGB(255, 65, 255, 65)),
+        primaryColor: const Color.fromARGB(255, 65, 255, 65),
+      ),
+      home: const HomePage(),
+    );
+  }
+}
