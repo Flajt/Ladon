@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_autofill_service/flutter_autofill_service.dart';
@@ -50,6 +49,7 @@ class _HomePageState extends State<HomePage> {
               password: element.password));
         }
         if (matchingDatasets.isNotEmpty) {
+          //Clipboard.setData(new ClipboardData(text: "your text"));
           await AutofillService().resultWithDatasets(matchingDatasets);
         }
         await SystemChannels.platform.invokeMethod('SystemNavigator.pop');
@@ -60,7 +60,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    setState(() {});
     savePasswordOnRequest();
     //handleAutoFillRequest();
     ServicePreferences.setupAutoFillServiceIfNotSelected();

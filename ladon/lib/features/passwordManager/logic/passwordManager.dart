@@ -48,4 +48,16 @@ class PasswordManager {
     }
     return matchingBlueprints;
   }
+
+  Future<void> saveOtp(String secret, ServiceBlueprint blueprint) async {
+    final updateBlueprint = ServiceBlueprint(
+        blueprint.password,
+        blueprint.email,
+        blueprint.label,
+        secret,
+        blueprint.logoUrl,
+        blueprint.domain,
+        blueprint.app);
+    await _hiveBox.put(blueprint.label, updateBlueprint);
+  }
 }
