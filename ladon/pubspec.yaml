@@ -48,6 +48,9 @@ dependencies:
   random_password_generator: ^0.2.1
   form_validator: ^1.0.2
   another_flushbar: ^1.10.28
+  provider: ^6.0.2
+  flutter_barcode_scanner: ^2.0.0
+  cached_network_image: ^3.2.0
 
 dev_dependencies:
   flutter_test:

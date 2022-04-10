@@ -1,4 +1,3 @@
-import 'package:flutter_autofill_service/flutter_autofill_service.dart';
 import 'package:hive/hive.dart';
 import 'package:ladon/features/passwordManager/blueprints/ServiceBlueprint.dart';
 
@@ -47,5 +46,17 @@ class PasswordManager {
       }
     }
     return matchingBlueprints;
+  }
+
+  Future<void> saveOtp(String secret, ServiceBlueprint blueprint) async {
+    final updateBlueprint = ServiceBlueprint(
+        blueprint.password,
+        blueprint.email,
+        blueprint.label,
+        secret,
+        blueprint.logoUrl,
+        blueprint.domain,
+        blueprint.app);
+    await _hiveBox.put(blueprint.label, updateBlueprint);
   }
 }

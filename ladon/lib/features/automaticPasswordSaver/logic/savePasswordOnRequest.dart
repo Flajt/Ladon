@@ -17,7 +17,6 @@ Future<void> savePasswordOnRequest() async {
       appName = metadata.packageNames.first;
     }
     SaveInfoMetadata? saveInfo = metadata.saveInfo;
-    print(saveInfo);
     await PasswordManager().savePassword(ServiceBlueprint(
         saveInfo!.password!,
         saveInfo.username!,

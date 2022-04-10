@@ -1,5 +1,26 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="de.triskalion.ladon.ladon" xmlns:tools="http://schemas.android.com/tools">
     <application android:label="ladon" android:name="${applicationName}" android:icon="@mipmap/ic_launcher">
+        <activity
+            android:name=".AutofillActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/LaunchTheme"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+            android:hardwareAccelerated="true"
+            android:windowSoftInputMode="adjustResize"
+            android:exported="true">
+
+            <meta-data
+                android:name="io.flutter.embedding.android.SplashScreenDrawable"
+                android:resource="@drawable/launch_background" />
+            <meta-data
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
+            <meta-data
+                android:name="flutterEmbedding"
+                android:value="2" />
+        </activity>
+        
         <activity android:name=".MainActivity" android:exported="true" android:launchMode="singleTop" android:theme="@style/LaunchTheme" android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode" android:hardwareAccelerated="true" android:windowSoftInputMode="adjustResize">
             <!-- Specifies an Android theme to apply to this Activity as soon as
                  the Android process has started. This theme is visible to the user
@@ -17,7 +38,7 @@
         <meta-data android:name="flutterEmbedding" android:value="2" />
         <meta-data android:name="android.autofill" android:resource="@xml/service_configuration" />
         <meta-data android:name="com.keevault.flutter_autofill_service.ACTIVITY_NAME"
-            android:value="de.triskalion.ladon.ladon.MainActivity" />
+            android:value="de.triskalion.ladon.ladon.AutofillActivity" />
         <meta-data android:name="com.keevault.flutter_autofill_service.SAVE_ACTIVITY_NAME"
             android:value="de.triskalion.ladon.ladon.MainActivity" />
         <meta-data
@@ -26,7 +47,7 @@
         <service
             android:name="com.keevault.flutter_autofill_service.FlutterAutofillService"
             tools:replace="label"        
-            android:label="Ladon Autofillservice">
+            android:label="Ladon">
     </service>
 </application>
 </manifest>
