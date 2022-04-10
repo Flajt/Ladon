@@ -55,12 +55,19 @@ class _OtpSaveWidgetState extends State<OtpSaveWidget> {
         ),
         IconButton(
             onPressed: () async {
-              String code = await QrScanner.scan();
+              String uri = await QrScanner.scan();
+              String code = _parseOTPCode(uri);
               _textEditingController.value = TextEditingValue(text: code);
               if (code != "-1") provider.otp = code;
             },
             icon: const Icon(Icons.qr_code))
       ],
     );
+  }
+
+  String _parseOTPCode(String uri) {
+    Uri parsedUri = Uri.parse(uri);
+    Map<String, List<String>> queryParameters = parsedUri.queryParametersAll;
+    return queryParameters["secret"]![0];
   }
 }
