@@ -80,14 +80,19 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: Colors.transparent,
           flexibleSpace: Column(
             mainAxisAlignment: MainAxisAlignment.end,
-            children: const [
-              TabBar(tabs: [
-                Text(
-                  "Home",
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                Text("2-FA", style: TextStyle(fontWeight: FontWeight.bold))
-              ])
+            children: [
+              TabBar(
+                  indicatorColor: Theme.of(context).primaryColor,
+                  tabs: const [
+                    Text(
+                      "Home",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 20.0),
+                    ),
+                    Text("2-FA",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20.0))
+                  ])
             ],
           ),
         ),
