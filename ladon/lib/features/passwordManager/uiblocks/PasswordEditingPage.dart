@@ -77,7 +77,7 @@ class _PasswordEditingPageState extends State<PasswordEditingPage> {
                           )),
                       CircleAvatar(
                         backgroundColor: Theme.of(context).primaryColor,
-                        child: blueprint.logoUrl!.isNotEmpty
+                        child: blueprint.logoUrl?.isNotEmpty ?? false
                             ? Image.network(blueprint.logoUrl!)
                             : const Icon(Icons.question_mark),
                       ),
