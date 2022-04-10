@@ -8,8 +8,7 @@ class FailureNotification extends Flushbar {
       : super(
             key: key,
             message: message,
-            icon: Icon(Icons.error_outline,
-                color: Theme.of(context).primaryColor),
+            icon: const Icon(Icons.error_outline, color: Colors.redAccent),
             duration: const Duration(seconds: 2),
             borderColor: Colors.redAccent,
             shouldIconPulse: true,
