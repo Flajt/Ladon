@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:ladon/shared/notifications/uiblock/SuccessNotification.dart';
 
 import '../blueprints/ServiceBlueprint.dart';
 
@@ -20,6 +22,13 @@ class ServiceTile extends StatelessWidget {
                 )),
       onTap: () => Navigator.of(context)
           .pushNamed("/editPasswordPage", arguments: {"blueprint": blueprint}),
+      trailing: IconButton(
+          onPressed: () {
+            Clipboard.setData(ClipboardData(text: blueprint.password));
+            SuccessNotification(context: context, message: "Copied Password")
+                .show(context);
+          },
+          icon: const Icon(Icons.copy)),
     );
   }
 }

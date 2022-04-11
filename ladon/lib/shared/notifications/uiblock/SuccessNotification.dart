@@ -7,6 +7,7 @@ class SuccessNotification extends Flushbar {
       : super(
             key: key,
             message: message,
+            duration: const Duration(seconds: 2),
             icon: Icon(Icons.check_circle_outline,
                 color: Theme.of(context).primaryColor),
             borderColor: Colors.greenAccent,
