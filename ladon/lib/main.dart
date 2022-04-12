@@ -16,6 +16,8 @@ import 'package:ladon/shared/provider/OtpProvider.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 
+import 'pages/PasswordGenerationPage.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Directory? path = await getExternalStorageDirectory();
@@ -37,7 +39,9 @@ class MyApp extends StatelessWidget {
               "/addPasswordPage": (context) => const PasswordPage(),
               "/addOtpPage": (context) => OtpPage(),
               "/editPasswordPage": (context) => const PasswordEditingPage(),
-              "/welcomePage": (context) => const WelcomeScreen()
+              "/welcomePage": (context) => const WelcomeScreen(),
+              "/passwordGenerationPage": (context) =>
+                  const PasswordGenerationPage()
             },
             title: 'Ladon',
             theme: ThemeData(

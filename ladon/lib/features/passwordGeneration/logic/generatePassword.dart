@@ -1,7 +1,7 @@
 import 'package:random_password_generator/random_password_generator.dart';
 
 class PasswordGenerator {
-  static generatePassword(
+  static String generatePassword(
       {bool letters = true,
       bool uppercase = true,
       bool numbers = true,
