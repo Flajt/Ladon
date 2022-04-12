@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ladon/features/otp/logic/QrScanner.dart';
 import 'package:ladon/shared/provider/OtpProvider.dart';
+import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:provider/provider.dart';
 
 //TODO: Check if we can convert it to a stateless widget
@@ -19,11 +19,13 @@ class OtpSaveWidget extends StatefulWidget {
 class _OtpSaveWidgetState extends State<OtpSaveWidget> {
   late final TextEditingController _textEditingController;
   late OtpProvider provider;
-
+  late MobileScannerController controller;
   @override
   void initState() {
     super.initState();
     _textEditingController = TextEditingController();
+    //TODO: Replace with alternative
+    controller = MobileScannerController(formats: [BarcodeFormat.qrCode]);
   }
 
   @override
@@ -35,6 +37,7 @@ class _OtpSaveWidgetState extends State<OtpSaveWidget> {
   @override
   void dispose() {
     _textEditingController.dispose();
+    controller.dispose();
     super.dispose();
   }
 
@@ -55,10 +58,20 @@ class _OtpSaveWidgetState extends State<OtpSaveWidget> {
         ),
         IconButton(
             onPressed: () async {
-              String uri = await QrScanner.scan();
-              String code = _parseOTPCode(uri);
-              _textEditingController.value = TextEditingValue(text: code);
-              if (code != "-1") provider.otp = code;
+              await showDialog(
+                  context: context,
+                  builder: (context) => MobileScanner(
+                      controller: controller,
+                      allowDuplicates: false,
+                      onDetect: ((barcode, args) => setState(() {
+                            String uri = barcode.rawValue ?? "";
+                            String code = _parseOTPCode(uri);
+                            _textEditingController.value =
+                                TextEditingValue(text: code);
+                            if (code != "-1") provider.otp = code;
+                            controller.stop();
+                            Navigator.of(context).pop();
+                          }))));
             },
             icon: const Icon(Icons.qr_code))
       ],
@@ -67,7 +80,11 @@ class _OtpSaveWidgetState extends State<OtpSaveWidget> {
 
   String _parseOTPCode(String uri) {
     Uri parsedUri = Uri.parse(uri);
-    Map<String, List<String>> queryParameters = parsedUri.queryParametersAll;
-    return queryParameters["secret"]![0];
+    if (parsedUri.hasQuery) {
+      Map<String, List<String>> queryParameters = parsedUri.queryParametersAll;
+      return queryParameters["secret"]![0];
+    } else {
+      return "";
+    }
   }
 }

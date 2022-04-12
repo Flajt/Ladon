@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:hive/hive.dart';
 import 'package:ladon/features/passwordManager/blueprints/ServiceBlueprint.dart';
 
@@ -8,21 +9,26 @@ class PasswordManager {
 
   late final LazyBox<ServiceBlueprint> _hiveBox;
 
-  Future<void> setup(List<int> key) async {
+  Future<void> setup(String key) async {
     Hive.registerAdapter(ServiceBlueprintAdapter());
     //TODO: Add encryption
-    _hiveBox = await Hive.openLazyBox<ServiceBlueprint>("passwords");
+    _hiveBox = await Hive.openLazyBox<ServiceBlueprint>("passwords",
+        encryptionCipher: HiveAesCipher(base64Decode(key)));
   }
 
   ///Returns all password entries in the db
   Future<List<ServiceBlueprint>> getPasswords() async {
-    List<ServiceBlueprint> loginBlueprints = [];
-    Iterable<dynamic> keys = _hiveBox.keys;
-    for (String key in keys) {
-      ServiceBlueprint? currentEntry = await _hiveBox.get(key);
-      if (currentEntry != null) loginBlueprints.add(currentEntry);
+    try {
+      List<ServiceBlueprint> loginBlueprints = [];
+      Iterable<dynamic> keys = _hiveBox.keys;
+      for (String key in keys) {
+        ServiceBlueprint? currentEntry = await _hiveBox.get(key);
+        if (currentEntry != null) loginBlueprints.add(currentEntry);
+      }
+      return loginBlueprints;
+    } catch (e) {
+      return [];
     }
-    return loginBlueprints;
   }
 
   ///Saves password in database

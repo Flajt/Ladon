@@ -20,9 +20,13 @@ class ViewOtpsPage extends StatelessWidget {
                   return ListView.builder(
                       itemCount: snapshot.data!.length,
                       itemBuilder: (context, index) {
-                        return OtpTile(
-                            otpBlueprint: OtpBlueprint.fromServiceBlueprint(
-                                snapshot.data![index]));
+                        if (snapshot.data![index].twoFASecret.isNotEmpty) {
+                          return OtpTile(
+                              otpBlueprint: OtpBlueprint.fromServiceBlueprint(
+                                  snapshot.data![index]));
+                        } else {
+                          return Container();
+                        }
                       });
                 }
                 return const Center(
