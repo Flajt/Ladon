@@ -1,18 +1,15 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_autofill_service/flutter_autofill_service.dart';
 import 'package:ladon/features/automaticPasswordSaver/logic/savePasswordOnRequest.dart';
 import 'package:ladon/features/credentialManagment/uiblock/AddCredentialButton.dart';
 import 'package:ladon/features/otp/logic/generateOtp.dart';
-import 'package:ladon/features/otp/uiblocks/OtpTile.dart';
 import 'package:ladon/features/passwordManager/blueprints/ServiceBlueprint.dart';
 import 'package:ladon/features/passwordManager/logic/passwordManager.dart';
 import 'package:ladon/features/passwordManager/uiblocks/ServiceDisplay.dart';
 import 'package:ladon/features/serviceSettings/logic/servicePreferences.dart';
 import 'package:ladon/features/welcome/logic/setup.dart';
 import 'package:ladon/pages/ViewOtpsPage.dart';
-import 'package:ladon/shared/notifications/uiblock/SuccessNotification.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -124,7 +121,9 @@ class _HomePageState extends State<HomePage> {
                   future: PasswordManager().getPasswords(),
                   builder: (context, snapshot) {
                     if (snapshot.hasData && snapshot.data!.isNotEmpty) {
-                      return ServiceDisplay(services: snapshot.data!);
+                      List<ServiceBlueprint> data = snapshot.data!;
+                      data.sort((a, b) => a.label.compareTo(b.label));
+                      return ServiceDisplay(services: data);
                     } else if (snapshot.hasError) {
                       return Center(child: Text(snapshot.error.toString()));
                     } else if (snapshot.connectionState ==
