@@ -5,10 +5,12 @@ import 'package:flutter_autofill_service/flutter_autofill_service.dart';
 import 'package:ladon/features/automaticPasswordSaver/logic/savePasswordOnRequest.dart';
 import 'package:ladon/features/credentialManagment/uiblock/AddCredentialButton.dart';
 import 'package:ladon/features/otp/logic/generateOtp.dart';
+import 'package:ladon/features/otp/uiblocks/OtpTile.dart';
 import 'package:ladon/features/passwordManager/blueprints/ServiceBlueprint.dart';
 import 'package:ladon/features/passwordManager/logic/passwordManager.dart';
 import 'package:ladon/features/passwordManager/uiblocks/ServiceDisplay.dart';
 import 'package:ladon/features/serviceSettings/logic/servicePreferences.dart';
+import 'package:ladon/features/welcome/logic/setup.dart';
 import 'package:ladon/pages/ViewOtpsPage.dart';
 import 'package:ladon/shared/notifications/uiblock/SuccessNotification.dart';
 
@@ -23,7 +25,27 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    handleAutoFillRequest();
+    _asyncWrapper();
+  }
+
+  @override
+  void didChangeDependencies() async {
+    super.didChangeDependencies();
+    //await authAndOnboarding();
+  }
+
+  Future<void> _asyncWrapper() async {
+    await authAndOnboarding();
+    await handleAutoFillRequest();
+  }
+
+  Future<void> authAndOnboarding() async {
+    List resp = await setup();
+    if (resp[1] == true) {
+      Navigator.of(context)
+          .popAndPushNamed("/welcomePage", arguments: {"pwKey": resp[0]});
+    }
+    setState(() {});
   }
 
   Future<void> handleAutoFillRequest() async {

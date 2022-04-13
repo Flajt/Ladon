@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="de.triskalion.ladon.ladon" xmlns:tools="http://schemas.android.com/tools">
-    <application android:label="ladon" android:name="${applicationName}" android:icon="@mipmap/ic_launcher">
+    <application android:allowBackup="false" android:label="ladon" android:name="${applicationName}" android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".AutofillActivity"
             android:launchMode="singleTop"
