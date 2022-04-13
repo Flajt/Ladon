@@ -18,7 +18,12 @@ class AddCredentialButton extends StatelessWidget {
           HawkFabMenuItem(
               label: "2FA",
               ontap: () => Navigator.of(context).pushNamed("/addOtpPage"),
-              icon: const Icon(Icons.sms))
+              icon: const Icon(Icons.sms)),
+          HawkFabMenuItem(
+              label: "Generate Password",
+              ontap: () =>
+                  Navigator.of(context).pushNamed("/passwordGenerationPage"),
+              icon: const Icon(Icons.text_fields_rounded))
         ]);
   }
 }
