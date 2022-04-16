@@ -1,0 +1,23 @@
+{
+  "name": "extension",
+  "version": "1.0.0",
+  "description": "The browser plugin for the open source password manager ladon",
+  "main": "index.js",
+  "scripts": {
+    "run": "",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
+  },
+  "keywords": [
+    "password manager"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^17.0.23",
+    "@types/webextension-polyfill": "^0.8.3",
+    "nodemon": "^2.0.15",
+    "typescript": "^4.6.3",
+    "webextension-polyfill": "^0.9.0"
+  }
+}
