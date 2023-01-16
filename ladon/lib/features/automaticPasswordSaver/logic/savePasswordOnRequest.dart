@@ -3,7 +3,7 @@ import '../../passwordManager/blueprints/ServiceBlueprint.dart';
 import '../../passwordManager/logic/passwordManager.dart';
 
 Future<void> savePasswordOnRequest() async {
-  AutofillMetadata? metadata = await AutofillService().getAutofillMetadata();
+  AutofillMetadata? metadata = await AutofillService().autofillMetadata;
   bool shouldSave = metadata?.saveInfo != null;
   if (shouldSave) {
     String? webdomain;

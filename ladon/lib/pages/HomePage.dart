@@ -51,8 +51,7 @@ class _HomePageState extends State<HomePage> {
     bool fillself = await AutofillService().fillRequestedInteractive;
 
     if (fillself || fillauto) {
-      AutofillMetadata? metadata =
-          await AutofillService().getAutofillMetadata();
+      AutofillMetadata? metadata = await AutofillService().autofillMetadata;
       String? webDomain = metadata!.webDomains.isNotEmpty
           ? metadata.webDomains.first.scheme! +
               "://" +
