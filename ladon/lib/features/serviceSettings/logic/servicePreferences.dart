@@ -1,9 +1,9 @@
 import 'package:flutter_autofill_service/flutter_autofill_service.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class ServicePreferences {
   static Future<bool> hasSelectedAsAutoFillService() async {
-    return await AutofillService().hasAutofillServicesSupport;
+    AutofillServiceStatus hasEnabledAutofill = await AutofillService().status;
+    return hasEnabledAutofill == AutofillServiceStatus.enabled ? true : false;
   }
 
   static Future<void> setAsAutoFillService() async {

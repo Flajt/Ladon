@@ -22,7 +22,7 @@ Future<void> savePasswordOnRequest() async {
         saveInfo.username!,
         appName ?? webdomain ?? "Unkown service",
         "",
-        webdomain != null ? schema! + "://" + webdomain + "/favicon.ico" : null,
+        webdomain != null ? "${schema!}://$webdomain/favicon.ico" : null,
         webdomain,
         appName));
     await AutofillService().onSaveComplete();
