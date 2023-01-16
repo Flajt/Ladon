@@ -28,7 +28,6 @@ class _HomePageState extends State<HomePage> {
   @override
   void didChangeDependencies() async {
     super.didChangeDependencies();
-    //await authAndOnboarding();
   }
 
   Future<void> _asyncWrapper() async {
@@ -53,9 +52,7 @@ class _HomePageState extends State<HomePage> {
     if (fillself || fillauto) {
       AutofillMetadata? metadata = await AutofillService().autofillMetadata;
       String? webDomain = metadata!.webDomains.isNotEmpty
-          ? metadata.webDomains.first.scheme! +
-              "://" +
-              metadata.webDomains.first.domain
+          ? "${metadata.webDomains.first.scheme!}://${metadata.webDomains.first.domain}"
           : null;
       String? appName =
           metadata.packageNames.isNotEmpty ? metadata.packageNames.first : null;
