@@ -3,7 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ServicePreferences {
   static Future<bool> hasSelectedAsAutoFillService() async {
-    return await AutofillService().hasEnabledAutofillServices;
+    return await AutofillService().hasAutofillServicesSupport;
   }
 
   static Future<void> setAsAutoFillService() async {
