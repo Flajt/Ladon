@@ -34,7 +34,8 @@ class ServiceColumn extends StatelessWidget {
       children: [
         TextFormField(
           controller: labelController,
-          validator: ValidationBuilder().minLength(2).maxLength(20).build(),
+          validator:
+              ValidationBuilder().minLength(2).maxLength(20).required().build(),
           decoration: const InputDecoration(
               border: OutlineInputBorder(),
               label: Text("Label"),
@@ -47,7 +48,11 @@ class ServiceColumn extends StatelessWidget {
             decoration: const InputDecoration(
                 border: OutlineInputBorder(), label: Text("Username"))),
         TextFormField(
-            validator: ValidationBuilder().minLength(8).maxLength(64).build(),
+            validator: ValidationBuilder()
+                .minLength(8)
+                .maxLength(64)
+                .required()
+                .build(),
             obscureText: true,
             controller: passwordController,
             decoration: const InputDecoration(
@@ -82,9 +87,9 @@ class ServiceColumn extends StatelessWidget {
               context: context,
             ).show(context);
           },
-          child: const Text("Submitt"),
           style: ElevatedButton.styleFrom(
-              primary: const Color.fromARGB(255, 65, 255, 65)),
+              backgroundColor: const Color.fromARGB(255, 65, 255, 65)),
+          child: const Text("Submitt"),
         )
       ],
     );
@@ -102,7 +107,7 @@ class ServiceColumn extends StatelessWidget {
         email.text.trim(),
         label.text.trim(),
         "",
-        url.text.isNotEmpty ? url.text.trim() + "/favicon.ico" : null,
+        url.text.isNotEmpty ? "${url.text.trim()}/favicon.ico" : null,
         url.text.trim().isNotEmpty ? url.text.trim() : null,
         appname.text.trim().isNotEmpty ? appname.text.trim() : null));
   }
