@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
 import 'package:ladon/features/passwordManager/uiblocks/PasswordEditingPage.dart';
 import 'package:ladon/pages/HomePage.dart';
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
             },
             title: 'Ladon',
             theme: ThemeData(
+              textTheme: GoogleFonts.robotoMonoTextTheme(),
               colorScheme: ColorScheme.fromSeed(
                   seedColor: const Color.fromARGB(255, 65, 255, 65)),
               primaryColor: const Color.fromARGB(255, 65, 255, 65),
