@@ -89,7 +89,7 @@ class ServiceColumn extends StatelessWidget {
           },
           style: ElevatedButton.styleFrom(
               backgroundColor: const Color.fromARGB(255, 65, 255, 65)),
-          child: const Text("Submitt"),
+          child: const Text("Submit"),
         )
       ],
     );
