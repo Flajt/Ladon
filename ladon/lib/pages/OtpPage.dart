@@ -26,14 +26,11 @@ class OtpPage extends StatelessWidget {
             children: [
               Positioned(
                   top: size.height * .05,
-                  left: size.width * 0.05,
+                  left: size.width * 0.2,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text("Save OTP",
-                        style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context).primaryColor)),
+                        style: Theme.of(context).textTheme.headline3),
                   )),
               Center(
                 child: SizedBox(
@@ -56,23 +53,20 @@ class OtpPage extends StatelessWidget {
                                       message: "Added 2FA Secret")
                                   .show(context);
                             } else {
-                              print(otp.isNotEmpty);
-                              print(otp.length);
-                              print(otpProvider.blueprint?.label);
                               FailureNotification(
                                 context: context,
                                 message: "No secret and/or service provided",
                               ).show(context);
                             }
                           },
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Theme.of(context).primaryColor,
+                              minimumSize: const Size(150, 50)),
                           child: const Text(
                             "Save 2FA",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 16.0),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                              primary: Theme.of(context).primaryColor,
-                              minimumSize: const Size(150, 50)))
+                          ))
                     ],
                   ),
                 ),
