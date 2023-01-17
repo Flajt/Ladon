@@ -54,6 +54,8 @@ dependencies:
   introduction_screen: ^3.0.2
   mobile_scanner: ^2.1.0
   material_floating_search_bar: ^0.3.7
+  share_plus: ^6.3.0
+  file_picker: ^5.2.5
 
 dev_dependencies:
   flutter_test:

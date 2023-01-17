@@ -19,4 +19,15 @@ class ServiceBlueprint {
   final String? app;
   ServiceBlueprint(this.password, this.email, this.label, this.twoFASecret,
       this.logoUrl, this.domain, this.app);
+  Map<String, dynamic> toJson() {
+    return {
+      "password": password,
+      "lable": label,
+      "email": email,
+      "twoFASecret": twoFASecret,
+      "logoUrl": logoUrl,
+      "domain": domain,
+      "app": app
+    };
+  }
 }

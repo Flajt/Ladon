@@ -7,7 +7,6 @@ import 'package:ladon/features/otp/logic/generateOtp.dart';
 import 'package:ladon/features/passwordManager/blueprints/ServiceBlueprint.dart';
 import 'package:ladon/features/passwordManager/logic/passwordManager.dart';
 import 'package:ladon/features/passwordManager/uiblocks/ServiceDisplay.dart';
-import 'package:ladon/features/serviceSettings/logic/servicePreferences.dart';
 import 'package:ladon/features/welcome/logic/setup.dart';
 import 'package:ladon/pages/ViewOtpsPage.dart';
 
@@ -85,7 +84,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     savePasswordOnRequest();
     //handleAutoFillRequest();
-    ServicePreferences.setupAutoFillServiceIfNotSelected();
     return DefaultTabController(
       initialIndex: 0,
       length: 2,
