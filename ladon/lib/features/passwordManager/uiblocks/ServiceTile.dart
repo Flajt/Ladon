@@ -13,7 +13,7 @@ class ServiceTile extends StatelessWidget {
       subtitle: Text(blueprint.email),
       title: Text(blueprint.label),
       leading: CircleAvatar(
-          backgroundColor: Theme.of(context).primaryColor,
+          backgroundColor: Colors.transparent,
           child: blueprint.logoUrl != null && blueprint.logoUrl!.isNotEmpty
               ? Image.network(blueprint.logoUrl!)
               : const Icon(
