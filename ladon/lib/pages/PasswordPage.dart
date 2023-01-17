@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:form_validator/form_validator.dart';
-import 'package:ladon/features/passwordManager/blueprints/ServiceBlueprint.dart';
 import 'package:ladon/features/passwordManager/logic/passwordManager.dart';
 import 'package:ladon/features/passwordManager/uiblocks/ServiceColumn.dart';
-import 'package:ladon/shared/notifications/uiblock/SuccessNotification.dart';
 
 class PasswordPage extends StatefulWidget {
   const PasswordPage({Key? key}) : super(key: key);
@@ -43,30 +40,24 @@ class _PasswordPageState extends State<PasswordPage> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: SafeArea(
-          child: SingleChildScrollView(
-        child: SizedBox(
-          height: size.height,
-          width: size.width,
-          child: Stack(
-            children: [
-              Align(
-                alignment: Alignment.topCenter,
-                child: Padding(
-                  padding: EdgeInsets.only(top: size.height * .1),
-                  child: Text(
-                    "Service Credentials",
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline4!
-                        .copyWith(color: Theme.of(context).primaryColor),
+      resizeToAvoidBottomInset: true,
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: SizedBox(
+            height: size.height,
+            width: size.width,
+            child: Stack(
+              children: [
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: Padding(
+                    padding: EdgeInsets.only(top: size.height * .05),
+                    child: Text("Service",
+                        style: Theme.of(context).textTheme.headline3!),
                   ),
                 ),
-              ),
-              Align(
-                alignment: Alignment.center,
-                child: Card(
+                Align(
+                  alignment: Alignment.center,
                   child: Container(
                       width: size.width * .9,
                       height: size.height * .5,
@@ -79,11 +70,11 @@ class _PasswordPageState extends State<PasswordPage> {
                         urlController: urlController,
                       )),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
-      )),
+      ),
     );
   }
 }
