@@ -10,10 +10,11 @@ class PasswordManager {
   late final LazyBox<ServiceBlueprint> _hiveBox;
 
   Future<void> setup(String key) async {
-    Hive.registerAdapter(ServiceBlueprintAdapter());
-    //TODO: Add encryption
-    _hiveBox = await Hive.openLazyBox<ServiceBlueprint>("passwords",
-        encryptionCipher: HiveAesCipher(base64Decode(key)));
+    if (!Hive.isAdapterRegistered(ServiceBlueprintAdapter().typeId)) {
+      Hive.registerAdapter(ServiceBlueprintAdapter());
+      _hiveBox = await Hive.openLazyBox<ServiceBlueprint>("passwords",
+          encryptionCipher: HiveAesCipher(base64Decode(key)));
+    }
   }
 
   ///Returns all password entries in the db
@@ -65,4 +66,6 @@ class PasswordManager {
         blueprint.app);
     await _hiveBox.put(blueprint.label, updateBlueprint);
   }
+
+  Future<void> tearDown() async => await _hiveBox.close();
 }
