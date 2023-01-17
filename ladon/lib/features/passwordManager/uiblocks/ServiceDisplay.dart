@@ -26,7 +26,8 @@ class _ServiceDisplayState extends State<ServiceDisplay> {
         automaticallyImplyBackButton: false,
         onQueryChanged: (query) => setState(() {
               blueprints = widget.services
-                  .where((element) => element.label.contains(query))
+                  .where((element) =>
+                      element.label.toLowerCase().contains(query.toLowerCase()))
                   .toList();
             }),
         body: ListView.builder(
