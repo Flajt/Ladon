@@ -42,7 +42,8 @@ class MyApp extends StatelessWidget {
             },
             title: 'Ladon',
             theme: ThemeData(
-              textTheme: GoogleFonts.robotoMonoTextTheme(),
+              textTheme: GoogleFonts.robotoMonoTextTheme(
+                  const TextTheme(headline3: TextStyle(color: Colors.black))),
               colorScheme: ColorScheme.fromSeed(
                   seedColor: const Color.fromARGB(255, 65, 255, 65)),
               primaryColor: const Color.fromARGB(255, 65, 255, 65),
