@@ -1,16 +1,11 @@
-import 'dart:convert';
 import 'dart:io';
-
-import 'package:biometric_storage/biometric_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_autofill_service/flutter_autofill_service.dart';
 import 'package:hive/hive.dart';
-import 'package:ladon/features/passwordManager/logic/passwordManager.dart';
 import 'package:ladon/features/passwordManager/uiblocks/PasswordEditingPage.dart';
 import 'package:ladon/pages/HomePage.dart';
 import 'package:ladon/pages/OtpPage.dart';
 import 'package:ladon/pages/PasswordPage.dart';
+import 'package:ladon/pages/SettingsPage.dart';
 import 'package:ladon/pages/WelcomePage.dart';
 import 'package:ladon/shared/provider/OtpProvider.dart';
 import 'package:path_provider/path_provider.dart';
@@ -41,7 +36,8 @@ class MyApp extends StatelessWidget {
               "/editPasswordPage": (context) => const PasswordEditingPage(),
               "/welcomePage": (context) => const WelcomeScreen(),
               "/passwordGenerationPage": (context) =>
-                  const PasswordGenerationPage()
+                  const PasswordGenerationPage(),
+              "/settingsPage": (context) => const SettingsPage()
             },
             title: 'Ladon',
             theme: ThemeData(
