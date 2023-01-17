@@ -11,10 +11,11 @@ class PasswordGenerationPage extends StatefulWidget {
 }
 
 class _PasswordGenerationPageState extends State<PasswordGenerationPage> {
-  String generatedPassword = PasswordGenerator.generatePassword();
   int passwordLength = 16;
   @override
   Widget build(BuildContext context) {
+    String generatedPassword =
+        PasswordGenerator.generatePassword(passwordLength: passwordLength);
     Size size = MediaQuery.of(context).size;
     return Scaffold(
         body: SafeArea(
@@ -27,12 +28,9 @@ class _PasswordGenerationPageState extends State<PasswordGenerationPage> {
           top: size.height * .08,
           child: Title(
               color: Theme.of(context).primaryColor,
-              child: Text(
+              child: const Text(
                 "Password Generation",
-                style: TextStyle(
-                    color: Theme.of(context).primaryColor,
-                    fontSize: 30.0,
-                    fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
               )),
         ),
         Align(
@@ -43,12 +41,17 @@ class _PasswordGenerationPageState extends State<PasswordGenerationPage> {
                 Text(
                   generatedPassword,
                   style: const TextStyle(
-                      fontWeight: FontWeight.bold, fontSize: 18.0),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18.0,
+                      overflow: TextOverflow.ellipsis),
                 ),
                 IconButton(
                     onPressed: () => Clipboard.setData(
                         ClipboardData(text: generatedPassword)),
-                    icon: const Icon(Icons.copy))
+                    icon: const Icon(
+                      Icons.copy,
+                      semanticLabel: "Copy Password",
+                    ))
               ],
             )),
         Positioned(
@@ -76,7 +79,7 @@ class _PasswordGenerationPageState extends State<PasswordGenerationPage> {
                 icon: const Icon(Icons.refresh),
                 label: const Text("Generate Password"),
                 style: ElevatedButton.styleFrom(
-                    primary: Theme.of(context).primaryColor)),
+                    backgroundColor: Theme.of(context).primaryColor)),
           ),
         )
       ]),
