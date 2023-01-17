@@ -27,7 +27,7 @@ class ServiceColumn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _passwordManger = PasswordManager();
+    final passwordManger = PasswordManager();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -74,18 +74,20 @@ class ServiceColumn extends StatelessWidget {
                 label: Text("Website url"),
                 hintText: "E.g. https://test.com")),
         ElevatedButton(
-          onPressed: () {
+          onPressed: () async {
             _handleSubmssion(
                 usernameController,
                 passwordController,
                 labelController,
                 appNameController,
                 urlController,
-                _passwordManger);
+                passwordManger);
             SuccessNotification(
               message: "Added Password Sucessfully",
               context: context,
             ).show(context);
+            await Future.delayed(const Duration(seconds: 2));
+            Navigator.of(context).popAndPushNamed("/");
           },
           style: ElevatedButton.styleFrom(
               backgroundColor: const Color.fromARGB(255, 65, 255, 65)),
