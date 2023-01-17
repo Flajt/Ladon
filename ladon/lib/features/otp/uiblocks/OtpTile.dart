@@ -22,7 +22,6 @@ class OtpTile extends StatelessWidget {
       ),
       title: StreamBuilder(
         stream: Stream.periodic(const Duration(seconds: 30), (number) {
-          print(DateTime.now().millisecondsSinceEpoch);
           return generateTotp(otpBlueprint.secret);
         }),
         builder: (context, snapshot) {
@@ -45,5 +44,3 @@ class OtpTile extends StatelessWidget {
     );
   }
 }
-
-test() {}
