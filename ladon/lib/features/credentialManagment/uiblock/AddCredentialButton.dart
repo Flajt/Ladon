@@ -23,7 +23,11 @@ class AddCredentialButton extends StatelessWidget {
               label: "Generate Password",
               ontap: () =>
                   Navigator.of(context).pushNamed("/passwordGenerationPage"),
-              icon: const Icon(Icons.text_fields_rounded))
+              icon: const Icon(Icons.text_fields_rounded)),
+          HawkFabMenuItem(
+              label: "Settings",
+              ontap: () => Navigator.of(context).pushNamed("/settingsPage"),
+              icon: const Icon(Icons.settings))
         ]);
   }
 }
