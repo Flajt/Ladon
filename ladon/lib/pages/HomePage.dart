@@ -47,7 +47,6 @@ class _HomePageState extends State<HomePage> {
     Future<List<ServiceBlueprint>> getPasswords =
         PasswordManager().getPasswords();
     savePasswordOnRequest();
-    //handleAutoFillRequest();
     return DefaultTabController(
       initialIndex: 0,
       length: 2,
