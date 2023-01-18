@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:ladon/features/passwordManager/logic/handleAutofillRequests.dart';
 import 'package:ladon/shared/notifications/uiblock/SuccessNotification.dart';
 
 import '../blueprints/ServiceBlueprint.dart';
@@ -20,7 +21,8 @@ class ServiceTile extends StatelessWidget {
                   Icons.question_mark,
                   color: Colors.black,
                 )),
-      onTap: () => Navigator.of(context)
+      onTap: () => handleManuelRequest(blueprint),
+      onLongPress: () => Navigator.of(context)
           .pushNamed("/editPasswordPage", arguments: {"blueprint": blueprint}),
       trailing: IconButton(
           onPressed: () {
