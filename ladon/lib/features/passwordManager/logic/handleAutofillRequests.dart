@@ -8,9 +8,8 @@ import '../blueprints/ServiceBlueprint.dart';
 Future<void> handleAutoFillRequest() async {
   PasswordManager passwordManager = PasswordManager();
   bool fillauto = await AutofillService().fillRequestedAutomatic;
-  bool fillself = await AutofillService().fillRequestedInteractive;
 
-  if (fillself || fillauto) {
+  if (fillauto) {
     AutofillMetadata? metadata = await AutofillService().autofillMetadata;
     String? webDomain = metadata!.webDomains.isNotEmpty
         ? "${metadata.webDomains.first.scheme!}://${metadata.webDomains.first.domain}"
@@ -38,6 +37,17 @@ Future<void> handleAutoFillRequest() async {
       }
       await SystemChannels.platform.invokeMethod('SystemNavigator.pop');
     }
+    await SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+  }
+}
+
+Future<void> handleManuelRequest(ServiceBlueprint blueprint) async {
+  bool manuelFill = await AutofillService().fillRequestedInteractive;
+  if (manuelFill) {
+    await AutofillService().resultWithDataset(
+        label: blueprint.label,
+        username: blueprint.label,
+        password: blueprint.password);
     await SystemChannels.platform.invokeMethod('SystemNavigator.pop');
   }
 }
