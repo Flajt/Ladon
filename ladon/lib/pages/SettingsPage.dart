@@ -1,8 +1,9 @@
-import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:ladon/features/importExportMangment/logic/ImportExportLogic.dart';
 import 'package:ladon/features/importExportMangment/uiblocks/ImportDialog.dart';
+import 'package:ladon/features/settings/uiblocks/SupportDialog.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../features/serviceSettings/logic/servicePreferences.dart';
 
@@ -20,6 +21,18 @@ class SettingsPage extends StatelessWidget {
             child: IconButton(
                 onPressed: () => Navigator.of(context).pop(),
                 icon: const Icon(Icons.arrow_back))),
+        const Divider(),
+        ListTile(
+            title: const Text("Support"),
+            subtitle: const Text("Support the developer"),
+            onTap: () => showDialog(
+                context: context, builder: (context) => const SupportDialog())),
+        const Divider(),
+        ListTile(
+          title: const Text("Github"),
+          subtitle: const Text("Check the code out"),
+          onTap: () => launchUrlString("https://github.com/Flajt/ladon"),
+        ),
         const Divider(),
         ListTile(
           title: const Text("Export Passwords"),
