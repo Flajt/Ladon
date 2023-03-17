@@ -19,6 +19,7 @@ class ImportDialog extends StatelessWidget {
           const Text(
             "Please enter your Masterkey",
             style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+            textAlign: TextAlign.center,
           ),
           SizedBox(
             width: 160,
