@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ladon/features/passwordManager/logic/handleAutofillRequests.dart';
@@ -16,7 +17,13 @@ class ServiceTile extends StatelessWidget {
       leading: CircleAvatar(
           backgroundColor: Colors.transparent,
           child: blueprint.logoUrl != null && blueprint.logoUrl!.isNotEmpty
-              ? Image.network(blueprint.logoUrl!)
+              ? CachedNetworkImage(
+                  imageUrl: blueprint.logoUrl!,
+                  errorWidget: (context, e, _) => const Icon(
+                    Icons.question_mark,
+                    color: Colors.black,
+                  ),
+                )
               : const Icon(
                   Icons.question_mark,
                   color: Colors.black,
