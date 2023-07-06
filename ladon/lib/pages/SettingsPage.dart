@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:ladon/features/importExportMangment/logic/ImportExportLogic.dart';
 import 'package:ladon/features/importExportMangment/uiblocks/ImportDialog.dart';
@@ -38,9 +40,11 @@ class SettingsPage extends StatelessWidget {
           title: const Text("Export Passwords"),
           subtitle: const Text("Exports passwords in plaintext"),
           onTap: () async {
+            final box = context.findRenderObject() as RenderBox?;
             String path = await ImportExportLogic.exportPlainText();
             XFile file = XFile(path);
-            await _shareFile(context, file);
+            await _shareFile(box, file);
+            await File(path).delete();
           },
         ),
         const Divider(),
@@ -50,8 +54,9 @@ class SettingsPage extends StatelessWidget {
           onTap: () async {
             List<dynamic> data = await ImportExportLogic.exportHiveFile();
             // ignore: use_build_context_synchronously
+            final box = context.findRenderObject() as RenderBox?;
             _shareFile(
-                context,
+                box,
                 XFile.fromData(data[0],
                     name: "passwords.hive", path: data[1].path));
           },
@@ -78,8 +83,7 @@ class SettingsPage extends StatelessWidget {
     )));
   }
 
-  Future<void> _shareFile(BuildContext context, XFile file) async {
-    final box = context.findRenderObject() as RenderBox?;
+  Future<void> _shareFile(RenderBox? box, XFile file) async {
     await Share.shareXFiles(
       [file],
       subject: "Ladon password storage",
