@@ -33,7 +33,7 @@ class ImportExportLogic {
       IOSink sink = hiveFile.openWrite();
       result.files.first.readStream!
           .listen(sink.add, onDone: () => sink.close());
-      MasterKeyInterface masteKeyStorage = MasterKeyStorageLogic();
+      MasterKeyStorageInterface masteKeyStorage = MasterKeyStorageLogic();
       await masteKeyStorage.setMasterKey(pw);
     } else {
       throw "No file selected";

@@ -7,7 +7,7 @@ import '../../../shared/logic/MasterKeyStorageLogic.dart';
 import '../../passwordManager/logic/passwordManager.dart';
 
 Future<List<dynamic>> setup() async {
-  MasterKeyInterface store = MasterKeyStorageLogic();
+  MasterKeyStorageInterface store = MasterKeyStorageLogic();
   String? key = await store.getMasterKey();
   bool firstTime = false;
   if (key == null) {
