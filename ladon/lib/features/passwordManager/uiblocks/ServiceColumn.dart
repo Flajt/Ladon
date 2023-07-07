@@ -28,72 +28,81 @@ class ServiceColumn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final passwordManger = PasswordManager();
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        TextFormField(
-          controller: labelController,
-          validator:
-              ValidationBuilder().minLength(2).maxLength(20).required().build(),
-          decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              label: Text("Label"),
-              hintText: "E.g. Google"),
-        ),
-        TextFormField(
-            validator: ValidationBuilder().minLength(2).maxLength(20).build(),
-            keyboardType: TextInputType.emailAddress,
-            controller: usernameController,
-            decoration: const InputDecoration(
-                border: OutlineInputBorder(), label: Text("Username"))),
-        TextFormField(
+    return Form(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          TextFormField(
+            controller: labelController,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             validator: ValidationBuilder()
-                .minLength(8)
-                .maxLength(64)
+                .minLength(2)
+                .maxLength(20)
                 .required()
                 .build(),
-            obscureText: true,
-            controller: passwordController,
-            decoration: const InputDecoration(
-                border: OutlineInputBorder(), label: Text("Password"))),
-        TextFormField(
-            keyboardType: TextInputType.text,
-            controller: appNameController,
             decoration: const InputDecoration(
                 border: OutlineInputBorder(),
-                label: Text("App name"),
-                hintText: "E.g. com.example.test")),
-        TextFormField(
-            validator: ValidationBuilder().url().build(),
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            keyboardType: TextInputType.url,
-            controller: urlController,
-            decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                label: Text("Website url"),
-                hintText: "E.g. https://test.com")),
-        ElevatedButton(
-          onPressed: () async {
-            _handleSubmssion(
-                usernameController,
-                passwordController,
-                labelController,
-                appNameController,
-                urlController,
-                passwordManger);
-            SuccessNotification(
-              message: "Added Password Sucessfully",
-              context: context,
-            ).show(context);
-            await Future.delayed(const Duration(seconds: 2));
-            Navigator.of(context).popAndPushNamed("/");
-          },
-          style: ElevatedButton.styleFrom(
-              backgroundColor: const Color.fromARGB(255, 65, 255, 65)),
-          child: const Text("Submit"),
-        )
-      ],
+                label: Text("Label"),
+                hintText: "E.g. Google"),
+          ),
+          TextFormField(
+              validator: ValidationBuilder().minLength(2).maxLength(20).build(),
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              keyboardType: TextInputType.emailAddress,
+              controller: usernameController,
+              decoration: const InputDecoration(
+                  border: OutlineInputBorder(), label: Text("Username"))),
+          TextFormField(
+              validator: ValidationBuilder()
+                  .minLength(8)
+                  .maxLength(64)
+                  .required()
+                  .build(),
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              obscureText: true,
+              controller: passwordController,
+              decoration: const InputDecoration(
+                  border: OutlineInputBorder(), label: Text("Password"))),
+          TextFormField(
+              keyboardType: TextInputType.text,
+              controller: appNameController,
+              decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  label: Text("App name"),
+                  hintText: "E.g. com.example.test")),
+          TextFormField(
+              validator: ValidationBuilder().url().build(),
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              keyboardType: TextInputType.url,
+              controller: urlController,
+              decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  label: Text("Website url"),
+                  hintText: "E.g. https://test.com")),
+          ElevatedButton(
+            onPressed: () async {
+              _handleSubmssion(
+                  usernameController,
+                  passwordController,
+                  labelController,
+                  appNameController,
+                  urlController,
+                  passwordManger);
+              SuccessNotification(
+                message: "Added Password Sucessfully",
+                context: context,
+              ).show(context);
+              await Future.delayed(const Duration(seconds: 2));
+              Navigator.of(context).popAndPushNamed("/");
+            },
+            style: ElevatedButton.styleFrom(
+                backgroundColor: const Color.fromARGB(255, 65, 255, 65)),
+            child: const Text("Submit"),
+          )
+        ],
+      ),
     );
   }
 
