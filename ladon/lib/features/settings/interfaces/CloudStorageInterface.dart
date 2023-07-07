@@ -1,7 +1,9 @@
+import 'dart:typed_data';
+
 abstract class CloudStorageInterface {
   Future<void> init();
   Future<void> authenticate();
   Future<void> upload();
-  Future<void> download();
+  Future<Uint8List> download();
   Future<void> disconnect();
 }
