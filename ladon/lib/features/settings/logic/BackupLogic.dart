@@ -5,12 +5,14 @@ import 'package:ladon/features/settings/logic/WhichBackuplogic.dart';
 import 'package:workmanager/workmanager.dart';
 
 import '../../passwordManager/logic/passwordManager.dart';
+import '../interfaces/BackupLogicInterface.dart';
 
-class BackupLogic {
+class BackupLogic implements BackupLogicInterface {
   BackupLogic(WhichBackupService whichBackupService)
       : _whichBackupService = whichBackupService;
   final WhichBackupService _whichBackupService;
 
+  @override
   Future<bool> backup() async {
     BackupService backupService = await _whichBackupService.backupService;
 
@@ -35,6 +37,7 @@ class BackupLogic {
     return Future.value(true);
   }
 
+  @override
   Future<void> enableBackup() async {
     await Workmanager().registerPeriodicTask("1", "backup",
         frequency: const Duration(days: 7),
@@ -43,6 +46,7 @@ class BackupLogic {
         existingWorkPolicy: ExistingWorkPolicy.replace);
   }
 
+  @override
   Future<void> restoreBackup(String key) async {
     await PasswordManager().tearDown();
     BackupService backupService = await _whichBackupService.backupService;
