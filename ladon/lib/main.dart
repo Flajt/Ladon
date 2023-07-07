@@ -9,7 +9,6 @@ import 'package:ladon/pages/PasswordPage.dart';
 import 'package:ladon/pages/SettingsPage.dart';
 import 'package:ladon/pages/WelcomePage.dart';
 import 'package:ladon/shared/provider/OtpProvider.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:workmanager/workmanager.dart';
 
@@ -18,8 +17,6 @@ import 'pages/PasswordGenerationPage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Directory? path = await getExternalStorageDirectory();
-  Hive.init(path!.path);
   Workmanager().initialize(
       callbackDispatcher, // The top level function, aka callbackDispatcher
       isInDebugMode: true);

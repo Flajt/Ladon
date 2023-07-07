@@ -4,7 +4,7 @@ import 'dart:typed_data';
 import 'package:file_picker/file_picker.dart';
 import 'package:hive/hive.dart';
 import 'package:ladon/features/passwordManager/blueprints/ServiceBlueprint.dart';
-import 'package:ladon/features/passwordManager/logic/passwordManager.dart';
+import 'package:ladon/features/passwordManager/logic/PasswordManager.dart';
 import 'package:ladon/shared/interfaces/MasterKeyStorageInterface.dart';
 import 'package:ladon/shared/logic/MasterKeyStorageLogic.dart';
 import 'package:path_provider/path_provider.dart';
@@ -15,7 +15,7 @@ class ImportExportLogic {
     FilePickerResult? result;
     String path = (await getExternalStorageDirectory())!.path;
     await PasswordManager().tearDown();
-    await Hive.deleteBoxFromDisk("passwords", path: path);
+    await PasswordManager().delete();
     if (cloudFunction == null) {
       result = await FilePicker.platform.pickFiles(
           allowMultiple: false, type: FileType.any, withReadStream: true);
@@ -63,9 +63,9 @@ class ImportExportLogic {
     File exportFile = await File("${dir!.path}/exports.json").create();
     IOSink sink = exportFile.openWrite();
     sink.writeln("[");
-    passwordBlueprints.forEach((element) {
+    for (var element in passwordBlueprints) {
       sink.writeln("${element.toJson()},");
-    });
+    }
     sink.writeln("]");
     await sink.close();
     return exportFile.path;

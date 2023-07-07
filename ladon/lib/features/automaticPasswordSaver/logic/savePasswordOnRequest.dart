@@ -1,6 +1,6 @@
 import 'package:flutter_autofill_service/flutter_autofill_service.dart';
 import '../../passwordManager/blueprints/ServiceBlueprint.dart';
-import '../../passwordManager/logic/passwordManager.dart';
+import '../../passwordManager/logic/PasswordManager.dart';
 
 Future<void> savePasswordOnRequest() async {
   AutofillMetadata? metadata = await AutofillService().autofillMetadata;

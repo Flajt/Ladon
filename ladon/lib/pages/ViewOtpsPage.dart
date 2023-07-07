@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ladon/features/otp/blueprints/OtpBlueprint.dart';
 import 'package:ladon/features/otp/uiblocks/OtpTile.dart';
 import 'package:ladon/features/passwordManager/blueprints/ServiceBlueprint.dart';
-import 'package:ladon/features/passwordManager/logic/passwordManager.dart';
+import 'package:ladon/features/passwordManager/logic/PasswordManager.dart';
 
 class ViewOtpsPage extends StatelessWidget {
   const ViewOtpsPage({Key? key}) : super(key: key);

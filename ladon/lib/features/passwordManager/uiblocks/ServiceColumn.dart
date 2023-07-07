@@ -3,7 +3,7 @@ import 'package:form_validator/form_validator.dart';
 
 import '../../../shared/notifications/uiblock/SuccessNotification.dart';
 import '../blueprints/ServiceBlueprint.dart';
-import '../logic/passwordManager.dart';
+import '../logic/PasswordManager.dart';
 
 class ServiceColumn extends StatelessWidget {
   final TextEditingController labelController;

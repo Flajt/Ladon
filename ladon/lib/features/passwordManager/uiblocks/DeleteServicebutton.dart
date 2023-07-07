@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:ladon/features/passwordManager/blueprints/ServiceBlueprint.dart';
-import 'package:ladon/features/passwordManager/logic/passwordManager.dart';
+import 'package:ladon/features/passwordManager/logic/PasswordManager.dart';
 
 class DeleteServiceButton extends StatelessWidget {
   const DeleteServiceButton(

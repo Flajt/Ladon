@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ladon/features/automaticPasswordSaver/logic/savePasswordOnRequest.dart';
 import 'package:ladon/features/credentialManagment/uiblock/AddCredentialButton.dart';
 import 'package:ladon/features/passwordManager/blueprints/ServiceBlueprint.dart';
-import 'package:ladon/features/passwordManager/logic/passwordManager.dart';
+import 'package:ladon/features/passwordManager/logic/PasswordManager.dart';
 import 'package:ladon/features/passwordManager/uiblocks/ServiceDisplay.dart';
 import 'package:ladon/features/welcome/logic/setup.dart';
 import 'package:ladon/pages/ViewOtpsPage.dart';
