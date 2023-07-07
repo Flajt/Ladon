@@ -9,12 +9,23 @@ import 'package:ladon/features/passwordManager/logic/passwordManager.dart';
 import 'package:path_provider/path_provider.dart';
 
 class ImportExportLogic {
-  static Future<void> importHiveFile(String pw) async {
+  static Future<void> importHiveFile(String pw,
+      [Future<Uint8List> Function()? cloudFunction]) async {
+    FilePickerResult? result;
     String path = (await getExternalStorageDirectory())!.path;
     await PasswordManager().tearDown();
     await Hive.deleteBoxFromDisk("passwords", path: path);
-    FilePickerResult? result = await FilePicker.platform.pickFiles(
-        allowMultiple: false, type: FileType.any, withReadStream: true);
+    if (cloudFunction == null) {
+      result = await FilePicker.platform.pickFiles(
+          allowMultiple: false, type: FileType.any, withReadStream: true);
+    }
+    if (cloudFunction != null) {
+      Uint8List? cloudFile = await cloudFunction();
+      result = FilePickerResult([
+        PlatformFile(
+            name: "passwords.hive", size: cloudFile.length, bytes: cloudFile)
+      ]);
+    }
     if (result != null) {
       File hiveFile = File("$path/${result.files.first.name}");
       hiveFile = await hiveFile.create();
