@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:ladon/features/importExportMangment/logic/ImportExportLogic.dart';
 import 'package:ladon/shared/notifications/uiblock/SuccessNotification.dart';
 import '../../../shared/notifications/uiblock/FailureNotification.dart';
 
 class ImportDialog extends StatelessWidget {
-  const ImportDialog({Key? key}) : super(key: key);
-
+  const ImportDialog({Key? key, required this.importFunction})
+      : super(key: key);
+  final void Function(String pw) importFunction;
   @override
   Widget build(BuildContext context) {
     TextEditingController controller = TextEditingController();
@@ -31,14 +31,14 @@ class ImportDialog extends StatelessWidget {
           ElevatedButton(
               onPressed: () async {
                 try {
-                  await ImportExportLogic.importHiveFile(controller.text);
+                  //await ImportExportLogic.importHiveFile(controller.text);
+                  importFunction(controller.text);
                   // ignore: use_build_context_synchronously
                   SuccessNotification(
                           message: "Please restart the app now",
                           context: context)
                       .show(context);
                 } catch (e, stack) {
-                  print(stack);
                   // ignore: use_build_context_synchronously
                   FailureNotification(
                     message: e.toString(),
