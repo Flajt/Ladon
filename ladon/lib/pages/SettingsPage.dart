@@ -1,10 +1,10 @@
-import 'package:biometric_storage/biometric_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ladon/features/settings/interfaces/WhichBackupInterface.dart';
 import 'package:ladon/features/settings/logic/BackupLogic.dart';
 import 'package:ladon/features/settings/logic/WhichBackuplogic.dart';
 import 'package:ladon/features/settings/uiblocks/SupportDialog.dart';
+import 'package:ladon/shared/logic/MasterKeyStorageLogic.dart';
 import 'package:ladon/shared/notifications/uiblock/SuccessNotification.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -68,8 +68,7 @@ class SettingsPage extends StatelessWidget {
           title: const Text("Copy Master Key"),
           subtitle: const Text("Copies the Master Key to the clipboard"),
           onTap: () async {
-            final store = await BiometricStorage().getStorage('ladonStorage');
-            String? pw = await store.read();
+            String? pw = await MasterKeyStorageLogic().getMasterKey();
             Clipboard.setData(ClipboardData(text: pw));
             // ignore: use_build_context_synchronously
             SuccessNotification(
