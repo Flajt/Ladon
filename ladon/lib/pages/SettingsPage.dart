@@ -1,13 +1,15 @@
-import 'dart:io';
-
+import 'package:biometric_storage/biometric_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:ladon/features/importExportMangment/logic/ImportExportLogic.dart';
-import 'package:ladon/features/importExportMangment/uiblocks/ImportDialog.dart';
+import 'package:flutter/services.dart';
+import 'package:ladon/features/settings/interfaces/WhichBackupInterface.dart';
+import 'package:ladon/features/settings/logic/BackupLogic.dart';
+import 'package:ladon/features/settings/logic/WhichBackuplogic.dart';
 import 'package:ladon/features/settings/uiblocks/SupportDialog.dart';
-import 'package:share_plus/share_plus.dart';
+import 'package:ladon/shared/notifications/uiblock/SuccessNotification.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 import '../features/serviceSettings/logic/servicePreferences.dart';
+import '../features/settings/uiblocks/ImportExportDialog.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -37,37 +39,13 @@ class SettingsPage extends StatelessWidget {
         ),
         const Divider(),
         ListTile(
-          title: const Text("Export Passwords"),
-          subtitle: const Text("Exports passwords in plaintext"),
-          onTap: () async {
-            final box = context.findRenderObject() as RenderBox?;
-            String path = await ImportExportLogic.exportPlainText();
-            XFile file = XFile(path);
-            await _shareFile(box, file);
-            await File(path).delete();
-          },
-        ),
-        const Divider(),
-        ListTile(
-          title: const Text("Export Storage"),
-          subtitle: const Text("Use if you want to migrate devices"),
-          onTap: () async {
-            List<dynamic> data = await ImportExportLogic.exportHiveFile();
-            // ignore: use_build_context_synchronously
-            final box = context.findRenderObject() as RenderBox?;
-            _shareFile(
-                box,
-                XFile.fromData(data[0],
-                    name: "passwords.hive", path: data[1].path));
-          },
-        ),
-        const Divider(),
-        ListTile(
-          title: const Text("Import Storage"),
-          onTap: () => showDialog(
-              context: context, builder: (context) => const ImportDialog()),
-          subtitle: const Text("Import hive file"),
-        ),
+            title: const Text("Import/Export"),
+            subtitle: const Text("Import/Export your passwords"),
+            onTap: () async {
+              showDialog(
+                  context: context,
+                  builder: (context) => const ImportExportDialog());
+            }),
         const Divider(),
         ListTile(
           title: const Text("Enable Autofill"),
@@ -75,19 +53,37 @@ class SettingsPage extends StatelessWidget {
               await ServicePreferences.setupAutoFillServiceIfNotSelected(),
         ),
         const Divider(),
+        ListTile(
+            title: const Text("Google Drive"),
+            subtitle: const Text("Backup/Restore to/from Google Drive"),
+            onTap: () async {
+              WhichBackupService whichBackupService = WhichBackupService();
+              final BackupLogic logic = BackupLogic(whichBackupService);
+              await whichBackupService
+                  .setBackupService(BackupService.googleDrive);
+              await logic.enableBackup();
+            }),
+        const Divider(),
+        ListTile(
+          title: const Text("Copy Master Key"),
+          subtitle: const Text("Copies the Master Key to the clipboard"),
+          onTap: () async {
+            final store = await BiometricStorage().getStorage('ladonStorage');
+            String? pw = await store.read();
+            Clipboard.setData(ClipboardData(text: pw));
+            // ignore: use_build_context_synchronously
+            SuccessNotification(
+                    message: "Master Key copied to clipboard", context: context)
+                .show(context);
+          },
+        ),
+        const Divider(),
         const AboutListTile(
+          applicationName: "Ladon",
           applicationLegalese: "Copyright 2023 Tjalf Bartel",
         ),
         const Divider()
       ],
     )));
-  }
-
-  Future<void> _shareFile(RenderBox? box, XFile file) async {
-    await Share.shareXFiles(
-      [file],
-      subject: "Ladon password storage",
-      sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size,
-    );
   }
 }
