@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ladon/features/automaticPasswordSaver/logic/savePasswordOnRequest.dart';
 import 'package:ladon/features/credentialManagment/uiblock/AddCredentialButton.dart';
+import 'package:ladon/features/passwordManager/bloc/ViewPasswordsBloc.dart';
+import 'package:ladon/features/passwordManager/bloc/events/ViewPasswordEvents.dart';
+import 'package:ladon/features/passwordManager/bloc/states/ViewPasswordStates.dart';
 import 'package:ladon/features/passwordManager/blueprints/ServiceBlueprint.dart';
 import 'package:ladon/features/passwordManager/logic/PasswordManager.dart';
 import 'package:ladon/features/passwordManager/uiblocks/ServiceDisplay.dart';
@@ -26,6 +30,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void didChangeDependencies() async {
     super.didChangeDependencies();
+    context.read<ViewPasswordBloc>().add(GetPasswords());
   }
 
   Future<void> _asyncWrapper() async {
@@ -44,8 +49,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    Future<List<ServiceBlueprint>> getPasswords =
-        PasswordManager().getPasswords();
     savePasswordOnRequest();
     return DefaultTabController(
       initialIndex: 0,
@@ -80,36 +83,31 @@ class _HomePageState extends State<HomePage> {
         ),
         body: TabBarView(children: [
           SafeArea(
-            child: FutureBuilder<List<ServiceBlueprint>>(
-                future: getPasswords,
-                builder: (context, snapshot) {
-                  if (snapshot.hasData && snapshot.data!.isNotEmpty) {
-                    List<ServiceBlueprint> data = snapshot.data!;
-                    data.sort((a, b) => a.label.compareTo(b.label));
-                    return ServiceDisplay(services: data);
-                  } else if (snapshot.hasError) {
-                    return Center(child: Text(snapshot.error.toString()));
-                  } else if (snapshot.connectionState == ConnectionState.done &&
-                      snapshot.data == []) {
-                    return const Center(child: Text("No data"));
-                  } else if (snapshot.connectionState ==
-                      ConnectionState.waiting) {
-                    return const Center(child: CircularProgressIndicator());
-                  }
-                  return Center(
-                    child: SizedBox(
-                      height: 100,
-                      child: Column(
-                        children: [
-                          const Text("No entries"),
-                          IconButton(
-                              onPressed: () => setState(() {}),
-                              icon: const Icon(Icons.refresh))
-                        ],
-                      ),
-                    ),
-                  );
-                }),
+            child: BlocBuilder<ViewPasswordBloc, ViewPasswordState>(
+                builder: (context, state) {
+              if (state is HasPasswords && state.passwords.isNotEmpty) {
+                List<ServiceBlueprint> data = state.passwords;
+                data.sort((a, b) => a.label.compareTo(b.label));
+                return ServiceDisplay(services: data);
+              } else if (state is HasError) {
+                return Center(child: Text(state.message.toString()));
+              }
+              return Center(
+                child: SizedBox(
+                  height: 100,
+                  child: Column(
+                    children: [
+                      const Text("No entries"),
+                      IconButton(
+                          onPressed: () => context
+                              .read<ViewPasswordBloc>()
+                              .add(GetPasswords()),
+                          icon: const Icon(Icons.refresh))
+                    ],
+                  ),
+                ),
+              );
+            }),
           ),
           const ViewOtpsPage()
         ]),

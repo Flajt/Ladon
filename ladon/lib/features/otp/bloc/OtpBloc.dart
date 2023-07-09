@@ -17,8 +17,6 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
           await _passwordManagerInterface.deleteOtp(event.otpBlueprint);
           emit(HasDeletedOtp());
         } else if (event is SaveOtp) {
-          print(otpSecret);
-          print(serviceBlueprint);
           if (otpSecret != null && serviceBlueprint != null) {
             await _passwordManagerInterface.saveOtp(
                 otpSecret!, serviceBlueprint!);
