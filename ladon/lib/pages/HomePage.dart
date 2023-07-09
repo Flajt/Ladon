@@ -60,14 +60,20 @@ class _HomePageState extends State<HomePage> {
               TabBar(
                   indicatorColor: Theme.of(context).primaryColor,
                   tabs: const [
-                    Text(
-                      "Home",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 20.0),
-                    ),
-                    Text("2-FA",
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        "Home",
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20.0))
+                            fontWeight: FontWeight.bold, fontSize: 20.0),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text("2-FA",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 20.0)),
+                    )
                   ])
             ],
           ),
