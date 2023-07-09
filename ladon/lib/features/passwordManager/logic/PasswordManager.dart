@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:hive/hive.dart';
+import 'package:ladon/features/otp/blueprints/OtpBlueprint.dart';
 import 'package:ladon/features/passwordManager/blueprints/ServiceBlueprint.dart';
 
 import '../interfaces/PasswordManagerInterface.dart';
@@ -81,4 +83,12 @@ class PasswordManager implements PasswordManagerInterface {
   Future<void> delete() async => await _hiveBox.deleteFromDisk();
   @override
   Future<void> tearDown() async => await _hiveBox.close();
+
+  @override
+  Future<void> deleteOtp(OtpBlueprint blueprint) async {
+    ServiceBlueprint? serviceBlueprint =
+        await _hiveBox.get(blueprint.serviceLable);
+    _hiveBox.put(
+        blueprint.serviceLable, serviceBlueprint!.copyWith(twoFASecret: ""));
+  }
 }
