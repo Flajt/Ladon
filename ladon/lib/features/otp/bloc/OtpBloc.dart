@@ -22,7 +22,7 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
                 otpSecret!, serviceBlueprint!);
             otpSecret = null;
             serviceBlueprint = null;
-            emit(HasSavedOtpValues());
+            emit(HasSavedOtp());
           }
         } else if (event is SetOtpSecret) {
           otpSecret = event.otpSecret;

@@ -16,6 +16,7 @@ class ViewOtpsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     context.read<ViewPasswordBloc>().add(GetPasswords());
     return BlocListener<OtpBloc, OtpState>(
+      listenWhen: (previous, current) => current is HasDeletedOtp,
       listener: (context, state) {
         if (state is HasDeletedOtp) {
           context.read<ViewPasswordBloc>().add(RefreshPasswords());

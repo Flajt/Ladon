@@ -15,16 +15,14 @@ class OtpPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return BlocListener<OtpBloc, OtpState>(
-      listenWhen: (previous, current) {
-        print(previous);
-        print(current);
-        return current is OtpError || current is HasSavedOtp;
-      },
-      listener: (context, state) {
+      listenWhen: (previous, current) => previous != current,
+      listener: (context, state) async {
         if (state is HasSavedOtp) {
           SuccessNotification(
                   message: "OTP saved successfully", context: context)
               .show(context);
+          await Future.delayed(const Duration(seconds: 2));
+          Navigator.of(context).pop();
         } else if (state is OtpError) {
           FailureNotification(message: state.message, context: context)
               .show(context);
