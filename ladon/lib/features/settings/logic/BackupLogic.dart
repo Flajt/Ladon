@@ -40,7 +40,7 @@ class BackupLogic implements BackupLogicInterface {
   @override
   Future<void> enableBackup() async {
     await Workmanager().registerPeriodicTask("1", "backup",
-        frequency: const Duration(days: 7),
+        frequency: const Duration(days: 1),
         constraints: Constraints(networkType: NetworkType.connected),
         backoffPolicy: BackoffPolicy.linear,
         existingWorkPolicy: ExistingWorkPolicy.replace);
