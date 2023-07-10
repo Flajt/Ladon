@@ -11,5 +11,4 @@ class SearchPasswords extends ViewPasswordEvent {
   SearchPasswords(this.query);
 }
 
-//TODO: Check for a better way
 class Setup extends ViewPasswordEvent {}
