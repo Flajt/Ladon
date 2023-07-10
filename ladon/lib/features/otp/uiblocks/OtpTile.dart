@@ -1,6 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ladon/features/otp/bloc/OtpBloc.dart';
+import 'package:ladon/features/otp/bloc/events/OtpEvents.dart';
 import 'package:ladon/features/otp/blueprints/OtpBlueprint.dart';
 import 'package:ladon/features/otp/logic/generateOtp.dart';
 
@@ -11,7 +14,9 @@ class OtpTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onLongPress: () => context.read<OtpBloc>().add(DeleteOtp(otpBlueprint)),
       leading: CircleAvatar(
+        backgroundColor: Colors.transparent,
         child: CachedNetworkImage(
           imageUrl: otpBlueprint.imageUrl,
           progressIndicatorBuilder: (context, message, progress) =>

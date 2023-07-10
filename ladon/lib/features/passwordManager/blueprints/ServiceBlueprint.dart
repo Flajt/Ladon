@@ -1,8 +1,9 @@
+import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 part 'ServiceBlueprint.g.dart';
 
 @HiveType(typeId: 0)
-class ServiceBlueprint {
+class ServiceBlueprint extends Equatable {
   @HiveField(0)
   final String password;
   @HiveField(1)
@@ -30,4 +31,35 @@ class ServiceBlueprint {
       "app": app
     };
   }
+
+  //Create copyWith method
+  ServiceBlueprint copyWith(
+      {String? password,
+      String? email,
+      String? label,
+      String? twoFASecret,
+      String? logoUrl,
+      String? domain,
+      String? app}) {
+    return ServiceBlueprint(
+        password ?? this.password,
+        email ?? this.email,
+        label ?? this.label,
+        twoFASecret ?? this.twoFASecret,
+        logoUrl ?? this.logoUrl,
+        domain ?? this.domain,
+        app ?? this.app);
+  }
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [
+        password,
+        email,
+        label,
+        twoFASecret,
+        logoUrl,
+        domain,
+        app,
+      ];
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_autofill_service/flutter_autofill_service.dart';
-import 'package:ladon/features/passwordManager/logic/passwordManager.dart';
+import 'package:ladon/features/passwordManager/logic/PasswordManager.dart';
 
 import '../../otp/logic/generateOtp.dart';
 import '../blueprints/ServiceBlueprint.dart';

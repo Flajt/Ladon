@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ladon/features/passwordManager/logic/passwordManager.dart';
+import 'package:ladon/features/passwordManager/logic/PasswordManager.dart';
 import 'package:ladon/features/passwordManager/uiblocks/ServiceColumn.dart';
 
 class PasswordPage extends StatefulWidget {

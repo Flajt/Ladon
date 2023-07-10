@@ -1,19 +1,24 @@
 import 'dart:convert';
+import 'dart:io';
 
-import 'package:biometric_storage/biometric_storage.dart';
 import 'package:hive/hive.dart';
+import 'package:ladon/shared/interfaces/MasterKeyStorageInterface.dart';
+import 'package:path_provider/path_provider.dart';
 
-import '../../passwordManager/logic/passwordManager.dart';
+import '../../../shared/logic/MasterKeyStorageLogic.dart';
+import '../../passwordManager/logic/PasswordManager.dart';
 
 Future<List<dynamic>> setup() async {
-  final store = await BiometricStorage().getStorage('ladonStorage');
-  String? key = await store.read();
+  MasterKeyStorageInterface store = MasterKeyStorageLogic();
+  String? key = await store.getMasterKey();
   bool firstTime = false;
   if (key == null) {
     key = base64Encode(Hive.generateSecureKey());
     firstTime = true;
-    store.write(key);
+    store.setMasterKey(key);
   }
-  await PasswordManager().setup(key);
+  Directory? path = await getExternalStorageDirectory();
+
+  await PasswordManager().setup(path!.path, key);
   return [key, firstTime];
 }

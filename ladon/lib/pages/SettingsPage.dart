@@ -1,10 +1,11 @@
-import 'package:biometric_storage/biometric_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ladon/features/settings/interfaces/WhichBackupInterface.dart';
 import 'package:ladon/features/settings/logic/BackupLogic.dart';
 import 'package:ladon/features/settings/logic/WhichBackuplogic.dart';
 import 'package:ladon/features/settings/uiblocks/SupportDialog.dart';
+import 'package:ladon/shared/logic/MasterKeyStorageLogic.dart';
+import 'package:ladon/shared/notifications/uiblock/FailureNotification.dart';
 import 'package:ladon/shared/notifications/uiblock/SuccessNotification.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -55,21 +56,32 @@ class SettingsPage extends StatelessWidget {
         const Divider(),
         ListTile(
             title: const Text("Google Drive"),
-            subtitle: const Text("Backup/Restore to/from Google Drive"),
+            subtitle: const Text("Backup to Google Drive"),
             onTap: () async {
-              WhichBackupService whichBackupService = WhichBackupService();
-              final BackupLogic logic = BackupLogic(whichBackupService);
-              await whichBackupService
-                  .setBackupService(BackupService.googleDrive);
-              await logic.enableBackup();
+              try {
+                WhichBackupService whichBackupService = WhichBackupService();
+                final BackupLogic logic = BackupLogic(whichBackupService);
+                await whichBackupService
+                    .setBackupService(BackupService.googleDrive);
+                await logic.backup();
+                await logic.enableBackup();
+                // ignore: use_build_context_synchronously
+                SuccessNotification(
+                        message: "Backup enabled!", context: context)
+                    .show(context);
+              } catch (e) {
+                FailureNotification(
+                        message: "Error while enabling backup",
+                        context: context)
+                    .show(context);
+              }
             }),
         const Divider(),
         ListTile(
           title: const Text("Copy Master Key"),
           subtitle: const Text("Copies the Master Key to the clipboard"),
           onTap: () async {
-            final store = await BiometricStorage().getStorage('ladonStorage');
-            String? pw = await store.read();
+            String? pw = await MasterKeyStorageLogic().getMasterKey();
             Clipboard.setData(ClipboardData(text: pw));
             // ignore: use_build_context_synchronously
             SuccessNotification(

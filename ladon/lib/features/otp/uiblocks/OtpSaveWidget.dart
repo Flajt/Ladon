@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:ladon/shared/provider/OtpProvider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ladon/features/otp/bloc/OtpBloc.dart';
+import 'package:ladon/features/otp/bloc/events/OtpEvents.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
-import 'package:provider/provider.dart';
 
 //TODO: Check if we can convert it to a stateless widget
 class OtpSaveWidget extends StatefulWidget {
@@ -18,12 +19,13 @@ class OtpSaveWidget extends StatefulWidget {
 
 class _OtpSaveWidgetState extends State<OtpSaveWidget> {
   late final TextEditingController _textEditingController;
-  late OtpProvider provider;
   late MobileScannerController controller;
+  late final OtpBloc _otpBloc;
   @override
   void initState() {
     super.initState();
     _textEditingController = TextEditingController();
+
     //TODO: Replace with alternative
     controller = MobileScannerController(formats: [BarcodeFormat.qrCode]);
   }
@@ -31,7 +33,7 @@ class _OtpSaveWidgetState extends State<OtpSaveWidget> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    provider = context.read<OtpProvider>();
+    _otpBloc = context.read<OtpBloc>();
   }
 
   @override
@@ -50,25 +52,26 @@ class _OtpSaveWidgetState extends State<OtpSaveWidget> {
           width: widget.size.width * .6,
           child: TextFormField(
             controller: _textEditingController,
-            onSaved: (value) => provider.otp = value ?? "",
-            onFieldSubmitted: (value) => provider.otp = value,
-            onChanged: (value) => provider.otp = value,
+            onSaved: (value) => _otpBloc.add(SetOtpSecret(value ?? "")),
+            onFieldSubmitted: (value) => _otpBloc.add(SetOtpSecret(value)),
+            onChanged: (value) => _otpBloc.add(SetOtpSecret(value)),
             decoration: const InputDecoration(labelText: "OTP Secret"),
           ),
         ),
         IconButton(
             onPressed: () async {
+              await controller.start();
+              // ignore: use_build_context_synchronously
               await showDialog(
                   context: context,
                   builder: (context) => MobileScanner(
                       controller: controller,
-                      allowDuplicates: false,
-                      onDetect: ((barcode, args) => setState(() {
-                            String uri = barcode.rawValue ?? "";
+                      onDetect: ((data) => setState(() {
+                            String uri = data.barcodes.first.rawValue ?? "";
                             String code = _parseOTPCode(uri);
                             _textEditingController.value =
                                 TextEditingValue(text: code);
-                            if (code != "-1") provider.otp = code;
+                            if (code != "-1") _otpBloc.add(SetOtpSecret(code));
                             controller.stop();
                             Navigator.of(context).pop();
                           }))));
