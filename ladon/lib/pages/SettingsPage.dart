@@ -5,6 +5,7 @@ import 'package:ladon/features/settings/logic/BackupLogic.dart';
 import 'package:ladon/features/settings/logic/WhichBackuplogic.dart';
 import 'package:ladon/features/settings/uiblocks/SupportDialog.dart';
 import 'package:ladon/shared/logic/MasterKeyStorageLogic.dart';
+import 'package:ladon/shared/notifications/uiblock/FailureNotification.dart';
 import 'package:ladon/shared/notifications/uiblock/SuccessNotification.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -55,13 +56,25 @@ class SettingsPage extends StatelessWidget {
         const Divider(),
         ListTile(
             title: const Text("Google Drive"),
-            subtitle: const Text("Backup/Restore to/from Google Drive"),
+            subtitle: const Text("Backup to Google Drive"),
             onTap: () async {
-              WhichBackupService whichBackupService = WhichBackupService();
-              final BackupLogic logic = BackupLogic(whichBackupService);
-              await whichBackupService
-                  .setBackupService(BackupService.googleDrive);
-              await logic.enableBackup();
+              try {
+                WhichBackupService whichBackupService = WhichBackupService();
+                final BackupLogic logic = BackupLogic(whichBackupService);
+                await whichBackupService
+                    .setBackupService(BackupService.googleDrive);
+                await logic.backup();
+                await logic.enableBackup();
+                // ignore: use_build_context_synchronously
+                SuccessNotification(
+                        message: "Backup enabled!", context: context)
+                    .show(context);
+              } catch (e) {
+                FailureNotification(
+                        message: "Error while enabling backup",
+                        context: context)
+                    .show(context);
+              }
             }),
         const Divider(),
         ListTile(

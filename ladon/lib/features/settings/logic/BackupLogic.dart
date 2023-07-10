@@ -1,3 +1,4 @@
+import 'package:drive_helper/drive_helper.dart';
 import 'package:ladon/features/importExportMangment/logic/ImportExportLogic.dart';
 import 'package:ladon/features/settings/interfaces/WhichBackupInterface.dart';
 import 'package:ladon/features/settings/logic/GoogleDriveStorage.dart';
@@ -19,6 +20,7 @@ class BackupLogic implements BackupLogicInterface {
     switch (backupService) {
       case BackupService.googleDrive:
         GoogleDriveStorage googleDriveStorage = GoogleDriveStorage();
+        await googleDriveStorage.init();
         await googleDriveStorage.upload();
         break;
       case BackupService.dropbox:
@@ -75,7 +77,13 @@ class BackupLogic implements BackupLogicInterface {
 @pragma('vm:entry-point')
 void callbackDispatcher() {
   Workmanager().executeTask((task, inputData) async {
-    BackupLogic backupLogic = BackupLogic(WhichBackupService());
-    return await backupLogic.backup();
+    try {
+      BackupLogic backupLogic = BackupLogic(WhichBackupService());
+      return await backupLogic.backup();
+    } catch (e, stack) {
+      print(stack);
+      print("Error in callbackDispatcher: $e");
+      return Future.error(e);
+    }
   });
 }
