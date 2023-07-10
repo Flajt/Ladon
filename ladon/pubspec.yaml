@@ -48,7 +48,6 @@ dependencies:
   random_password_generator: ^0.2.1
   form_validator: ^2.1.1
   another_flushbar: ^1.10.28
-  provider: ^6.0.2
   cached_network_image: ^3.2.0
   biometric_storage: ^4.1.1
   introduction_screen: ^3.0.2
