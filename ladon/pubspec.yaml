@@ -49,14 +49,14 @@ dependencies:
   form_validator: ^2.1.1
   another_flushbar: ^1.10.28
   cached_network_image: ^3.2.0
-  biometric_storage: ^4.1.1
+  biometric_storage: ^5.0.0
   introduction_screen: ^3.0.2
-  mobile_scanner: ^2.1.0
+  mobile_scanner: ^3.3.0
   material_floating_search_bar: ^0.3.7
-  share_plus: ^6.3.0
+  share_plus: ^7.0.2
   file_picker: ^5.2.5
-  google_fonts: ^3.0.1
-  flutter_donation_buttons: ^0.1.6
+  google_fonts: ^4.0.4
+  flutter_donation_buttons: ^0.3.7
   url_launcher: ^6.1.7
   drive_helper: ^1.4.0
   icons_plus: ^4.0.0
@@ -70,7 +70,7 @@ dev_dependencies:
     sdk: flutter
   build_runner: ^2.1.8
   hive_generator: ^2.0.0
-  flutter_launcher_icons: ^0.11.0
+  flutter_launcher_icons: ^0.13.1
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

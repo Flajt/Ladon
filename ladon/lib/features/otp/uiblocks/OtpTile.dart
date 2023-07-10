@@ -16,6 +16,7 @@ class OtpTile extends StatelessWidget {
     return ListTile(
       onLongPress: () => context.read<OtpBloc>().add(DeleteOtp(otpBlueprint)),
       leading: CircleAvatar(
+        backgroundColor: Colors.transparent,
         child: CachedNetworkImage(
           imageUrl: otpBlueprint.imageUrl,
           progressIndicatorBuilder: (context, message, progress) =>

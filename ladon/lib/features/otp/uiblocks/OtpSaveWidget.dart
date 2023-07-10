@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ladon/features/otp/bloc/OtpBloc.dart';
 import 'package:ladon/features/otp/bloc/events/OtpEvents.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
-import 'package:provider/provider.dart';
 
 //TODO: Check if we can convert it to a stateless widget
 class OtpSaveWidget extends StatefulWidget {
@@ -60,13 +60,14 @@ class _OtpSaveWidgetState extends State<OtpSaveWidget> {
         ),
         IconButton(
             onPressed: () async {
+              await controller.start();
+              // ignore: use_build_context_synchronously
               await showDialog(
                   context: context,
                   builder: (context) => MobileScanner(
                       controller: controller,
-                      allowDuplicates: false,
-                      onDetect: ((barcode, args) => setState(() {
-                            String uri = barcode.rawValue ?? "";
+                      onDetect: ((data) => setState(() {
+                            String uri = data.barcodes.first.rawValue ?? "";
                             String code = _parseOTPCode(uri);
                             _textEditingController.value =
                                 TextEditingValue(text: code);
