@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ladon/features/otp/bloc/OtpBloc.dart';
 import 'package:ladon/features/passwordGeneration/bloc/PasswordGeneratorBloc.dart';
+import 'package:ladon/features/passwordManager/bloc/CreateServiceBloc.dart';
 import 'package:ladon/features/passwordManager/bloc/ViewPasswordsBloc.dart';
 import 'package:ladon/features/passwordManager/uiblocks/PasswordEditingPage.dart';
 import 'package:ladon/pages/HomePage.dart';
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(create: (context) => CreateServiceBloc()),
         BlocProvider(create: (context) => ViewPasswordBloc()),
         BlocProvider<PasswordGeneratorBloc>(
             create: (context) => PasswordGeneratorBloc()),

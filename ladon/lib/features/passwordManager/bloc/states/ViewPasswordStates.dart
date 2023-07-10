@@ -25,3 +25,11 @@ class HasError extends ViewPasswordState {
   @override
   List<Object?> get props => [message];
 }
+
+class RedirectToWelcome extends ViewPasswordState {
+  final String key;
+
+  RedirectToWelcome(this.key);
+  @override
+  List<Object?> get props => [];
+}
