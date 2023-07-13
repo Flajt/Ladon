@@ -82,6 +82,13 @@ class SettingsPage extends StatelessWidget {
           subtitle: const Text("Copies the Master Key to the clipboard"),
           onTap: () async {
             String? pw = await MasterKeyStorageLogic().getMasterKey();
+            if (pw == null) {
+              // ignore: use_build_context_synchronously
+              FailureNotification(
+                      message: "No Master Key found", context: context)
+                  .show(context);
+              return;
+            }
             Clipboard.setData(ClipboardData(text: pw));
             // ignore: use_build_context_synchronously
             SuccessNotification(
