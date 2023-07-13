@@ -22,6 +22,24 @@ Yes, this password manager is free to use, unlimited passwords and OTP tokens ca
 - Privacy friendly: No tracking or analytics is embedded! (I consider building my own privacy friendly in the future)
 - Opensource: As you can see it's Open Source XD
 
+
+## Supported Platforms
+
+- [x] Android (Supported)
+- [ ] IOS (Not Implemented)
+- [ ] Linux (Not implemented)
+- [ ] MacOS (Not implemented)
+- [ ] Windows (Not implemented)
+- [ ] Web (Not planned)
+- [ ] Browser Plugin (Not implemented)
+
+**Rational**
+- IOS: The currently used Plugin for autofiling doesn't support IOS, which is why I havent implemented it.
+- Desktop: I didn't want to overdo it without even releasing the app yet, it would require a rework sync and backup system.
+- Browser Plugin: Same as above, if there is demand at some point, combinding it with a desktop app would be the way to go I think (for syncing passwords securely) as plugins have security concerns apperantly.
+- Web: I think Desktop should be sufficent for that, so I don't even plan for it. I'm also not sure about security
+
+
 ## Additional features
 
 If you want to have additional features create an Issue and idealy a PR for it. At some point I will add some contribution guidelines as well. Also I'm not good with design, so any tips are appreciated as well.
