@@ -4,7 +4,7 @@ An opensource, free to use , Password Manager
 
 # Motiviation
 
-After the MYKI (a free to use password manager) has been aquired by a third party, I was toying with the idea of creating my own password manager just for fun, and so this is what I did. It's currently rather barebones, as I don't think it's worth implementing dozens of features if nobody uses it. Also I want to work on other projects as well, so my goal was to create an MVP.
+After the MYKI (a free to use password manager) has been aquired by a third party, I was toying with the idea of creating my own password manager just for fun, and so this is what I did. It's currently rather barebones, as I don't think it's worth implementing dozens of features if nobody uses it. 
 
 # Free to use
 
