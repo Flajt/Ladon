@@ -13,6 +13,7 @@ class SuccessNotification extends Flushbar {
             borderColor: Colors.greenAccent,
             shouldIconPulse: true,
             isDismissible: true);
+  // ignore: overridden_fields, annotate_overrides
   final String message;
   final BuildContext context;
 }

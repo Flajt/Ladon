@@ -64,7 +64,7 @@ class _PasswordEditingPageState extends State<PasswordEditingPage> {
                   child: Title(
                       color: Colors.black,
                       child: Text(blueprint.label,
-                          style: Theme.of(context).textTheme.headline3!)),
+                          style: Theme.of(context).textTheme.displaySmall!)),
                 )),
             Align(
                 alignment: Alignment.center,

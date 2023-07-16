@@ -27,7 +27,7 @@ class WelcomeScreen extends StatelessWidget {
               image: Center(child: Image.asset("assets/tax-free.png")),
               title: "Free 4 Ever",
               body:
-                  "The goal of this app is to be free for ever. So no ads, no in app purachases. If you want to, you can tip me in the settings page, however this is purely optional."),
+                  "Unlimited Passwords, 2FA, exports and backups are free for ever. If you want to, you can tip me in the settings page, however this is purely optional."),
           PageViewModel(
               image: Center(child: Image.asset("assets/github.png")),
               title: "Open Source",

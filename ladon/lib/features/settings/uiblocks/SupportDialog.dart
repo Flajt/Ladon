@@ -7,12 +7,12 @@ class SupportDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Dialog(
+    return const Dialog(
       child: SizedBox(
         height: 200,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: const [
+          children: [
             Text("Support"),
             BuyMeACoffeeButton(buyMeACoffeeName: "flajt"),
             KofiButton(kofiName: "flajt", kofiColor: KofiColor.Orange)

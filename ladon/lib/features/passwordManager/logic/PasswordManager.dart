@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'package:hive/hive.dart';
 import 'package:ladon/features/otp/blueprints/OtpBlueprint.dart';
 import 'package:ladon/features/passwordManager/blueprints/ServiceBlueprint.dart';

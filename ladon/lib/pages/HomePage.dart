@@ -5,9 +5,7 @@ import 'package:ladon/features/credentialManagment/uiblock/AddCredentialButton.d
 import 'package:ladon/features/passwordManager/bloc/ViewPasswordsBloc.dart';
 import 'package:ladon/features/passwordManager/bloc/events/ViewPasswordEvents.dart';
 import 'package:ladon/features/passwordManager/bloc/states/ViewPasswordStates.dart';
-import 'package:ladon/features/passwordManager/blueprints/ServiceBlueprint.dart';
 import 'package:ladon/features/passwordManager/uiblocks/ServiceDisplay.dart';
-import 'package:ladon/features/welcome/logic/setup.dart';
 import 'package:ladon/pages/ViewOtpsPage.dart';
 
 import '../features/passwordManager/logic/handleAutofillRequests.dart';

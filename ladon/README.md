@@ -8,9 +8,10 @@ After the MYKI (a free to use password manager) has been aquired by a third part
 
 # Free to use
 
-Yes, this password manager is free to use, unlimited passwords and OTP tokens can be stored (as long as your device can manage it). All currently implemeneted features will stay **free for ever**! Maybe in the future I will add some paid features, however they will be purely optional (e.g. Checking if your password or email was in a databreach). 
+Yes, this password manager is free to use, unlimited passwords and OTP tokens can be stored (as long as your device can manage it). All currently implemented features (v 1.0) will stay **free for ever**! Maybe in the future I will add some paid features, however they will be purely optional (e.g. Checking if your password or email was in a databreach).
 
 # Features:
+
 - Password generation: Generate secure passwords
 - Autofill support: Enable it in the settings and you can autofill passwords everywhere
 - OTP support: You can easily add support for OTP
@@ -21,7 +22,7 @@ Yes, this password manager is free to use, unlimited passwords and OTP tokens ca
 - Offline first: Currently only service preview images are downloaded that's it.
 - Privacy friendly: No tracking or analytics is embedded! (I consider building my own privacy friendly in the future)
 - Opensource: As you can see it's Open Source XD
-
+- Biometric Auth: Login only with Biometric auth
 
 ## Supported Platforms
 
@@ -39,16 +40,33 @@ Yes, this password manager is free to use, unlimited passwords and OTP tokens ca
 - Browser Plugin: Same as above, if there is demand at some point, combinding it with a desktop app would be the way to go I think (for syncing passwords securely) as plugins have security concerns apperantly.
 - Web: I think Desktop should be sufficent for that, so I don't even plan for it. I'm also not sure about security
 
-
-## Additional features
+## Request features
 
 If you want to have additional features create an Issue and idealy a PR for it. At some point I will add some contribution guidelines as well. Also I'm not good with design, so any tips are appreciated as well.
 
-
 ## Techstack
+
 - Framework: Flutter 
 - Database: Hive (will be migrated soon)
 - State management: BLOC
+
+### Backup Support
+
+- [x] Google Drive
+- [ ] ICloud
+- [ ] DropBox
+- [ ] WebDAV
+
+## Language Support
+
+- [x] English
+- [ ] German (Planned)
+- [ ] Spanish (Planned)
+- [ ] French (Planned)
+- [ ] Japanese (Planned)
+- [ ] Chinese (Planned)
+
+Contributions for other languages are greatly appreciated. 
 
 ## Security
 
@@ -57,9 +75,8 @@ Currently the database is encrypted at rest with your master key, which is store
 <br>
 Any additional security advice is welcome.
 
-
-
 ### Image Credits:
+
 - Logo: free to download [pinterest.com](https://www.pinterest.de/pin/hydra-free-vector-icons-designed-by-freepik--168251736063434013/)
 - <a href="https://www.flaticon.com/free-icons/thank-you" title="thank you icons">Thank you icons created by rsetiawan - Flaticon</a>
 - <a href="https://www.flaticon.com/free-icons/key" title="key icons">Key icons created by Freepik - Flaticon</a>

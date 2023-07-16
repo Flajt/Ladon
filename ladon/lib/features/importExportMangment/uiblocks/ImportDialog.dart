@@ -38,7 +38,7 @@ class ImportDialog extends StatelessWidget {
                           message: "Please restart the app now",
                           context: context)
                       .show(context);
-                } catch (e, stack) {
+                } catch (e) {
                   // ignore: use_build_context_synchronously
                   FailureNotification(
                     message: e.toString(),

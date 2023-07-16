@@ -13,6 +13,7 @@ class FailureNotification extends Flushbar {
             borderColor: Colors.redAccent,
             shouldIconPulse: true,
             isDismissible: true);
+  // ignore: annotate_overrides, overridden_fields
   final String message;
   final BuildContext context;
 }

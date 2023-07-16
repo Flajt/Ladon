@@ -18,7 +18,7 @@ class ServiceBlueprint extends Equatable {
   final String? domain;
   @HiveField(6)
   final String? app;
-  ServiceBlueprint(this.password, this.email, this.label, this.twoFASecret,
+  const ServiceBlueprint(this.password, this.email, this.label, this.twoFASecret,
       this.logoUrl, this.domain, this.app);
   Map<String, dynamic> toJson() {
     return {

@@ -53,7 +53,7 @@ class _PasswordPageState extends State<PasswordPage> {
                   child: Padding(
                     padding: EdgeInsets.only(top: size.height * .05),
                     child: Text("Service",
-                        style: Theme.of(context).textTheme.headline3!),
+                        style: Theme.of(context).textTheme.displaySmall!),
                   ),
                 ),
                 Align(
